@@ -21,6 +21,13 @@ namespace coreApi_PFA.Controllers
         {
             _context = context;
         }
+        //GET: api/Etudiants/Nb
+        [HttpGet]
+        [Route("Nb")]
+        public async Task<int> GetNb()
+        {
+            return await _context.Etudiant.CountAsync();
+        }
 
         // GET: api/Etudiants
         [HttpGet]
