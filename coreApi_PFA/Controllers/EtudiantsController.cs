@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using coreApi_PFA.Models;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.VisualBasic;
 
 namespace coreApi_PFA.Controllers
 {
@@ -29,11 +30,34 @@ namespace coreApi_PFA.Controllers
             return await _context.Etudiant.CountAsync();
         }
 
+        //GET: api/Enseignants/Nb
+        [HttpGet]
+        [Route("Nb")]
+        public async Task<int> GetNb()
+        {
+            return await _context.Etudiant.CountAsync();
+        }
+
         // GET: api/Etudiants
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Etudiant>>> GetEtudiant()
+        public async Task<object> GetEtudiant()
         {
-            return await _context.Etudiant.ToListAsync();
+            return await (from e in _context.Etudiant join f in _context.Filiere on e.IdFiliere equals f.Id
+                     select new
+                     {   Id = e.Id,
+                         Cin = e.Cin,
+                         DateNais = e.DateNais,
+                         Nom = e.Nom,
+                         Prenom = e.Prenom,
+                         Email = e.Email,
+                         MotdePasse = e.MotdePasse,
+                         Adresse = e.Adresse,
+                         Telephone = e.Telephone,
+                         Genre=e.Genre,
+                         CNE = e.Cne,
+                         IdFiliere = e.IdFiliere,
+                         Filiere = f.Libelle,
+                     }).ToListAsync();
         }
 
         // GET: api/Etudiants/5
@@ -54,7 +78,6 @@ namespace coreApi_PFA.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        [Route("Modifier")]
         public async Task<IActionResult> PutEtudiant(int id, Etudiant etudiant)
         {
             if (id != etudiant.Id)
@@ -98,7 +121,6 @@ namespace coreApi_PFA.Controllers
 
         // DELETE: api/Etudiants/5
         [HttpDelete("{id}")]
-        [Route("Supprimer")]
         public async Task<ActionResult<Etudiant>> DeleteEtudiant(int id)
         {
             var etudiant = await _context.Etudiant.FindAsync(id);

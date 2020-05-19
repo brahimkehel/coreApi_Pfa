@@ -13,57 +13,48 @@ namespace coreApi_PFA.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("CorsEnabling")]
-    public class EnseignantsController : ControllerBase
+    public class MatieresController : ControllerBase
     {
         private readonly Pfa1Context _context;
 
-        public EnseignantsController(Pfa1Context context)
+        public MatieresController(Pfa1Context context)
         {
             _context = context;
         }
 
-        //GET: api/Enseignants/Nb
+        // GET: api/Matieres
         [HttpGet]
-        [Route("Nb")]
-        public async Task<int> GetNb()
+        public async Task<ActionResult<IEnumerable<Matiere>>> GetMatiere()
         {
-            return await _context.Enseignant.CountAsync();
+            return await _context.Matiere.ToListAsync();
         }
 
-        // GET: api/Enseignants
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Enseignant>>> GetEnseignant()
-        {
-            return await _context.Enseignant.ToListAsync();
-        }
-
-        // GET: api/Enseignants/5
+        // GET: api/Matieres/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Enseignant>> GetEnseignant(int id)
+        public async Task<ActionResult<Matiere>> GetMatiere(int id)
         {
-            var enseignant = await _context.Enseignant.FindAsync(id);
+            var matiere = await _context.Matiere.FindAsync(id);
 
-            if (enseignant == null)
+            if (matiere == null)
             {
                 return NotFound();
             }
 
-            return enseignant;
+            return matiere;
         }
 
-        // PUT: api/Enseignants/5
+        // PUT: api/Matieres/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        [Route("Modifier")]
-        public async Task<IActionResult> PutEnseignant(int id, Enseignant enseignant)
+        public async Task<IActionResult> PutMatiere(int id, Matiere matiere)
         {
-            if (id != enseignant.Id)
+            if (id != matiere.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(enseignant).State = EntityState.Modified;
+            _context.Entry(matiere).State = EntityState.Modified;
 
             try
             {
@@ -71,7 +62,7 @@ namespace coreApi_PFA.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EnseignantExists(id))
+                if (!MatiereExists(id))
                 {
                     return NotFound();
                 }
@@ -84,38 +75,37 @@ namespace coreApi_PFA.Controllers
             return NoContent();
         }
 
-        // POST: api/Enseignants
+        // POST: api/Matieres
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        [Route("Ajouter")]
-        public async Task<ActionResult<Enseignant>> PostEnseignant(Enseignant enseignant)
+        public async Task<ActionResult<Matiere>> PostMatiere(Matiere matiere)
         {
-            _context.Enseignant.Add(enseignant);
+            _context.Matiere.Add(matiere);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEnseignant", new { id = enseignant.Id }, enseignant);
+            return CreatedAtAction("GetMatiere", new { id = matiere.Id }, matiere);
         }
 
-        // DELETE: api/Enseignants/5
+        // DELETE: api/Matieres/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Enseignant>> DeleteEnseignant(int id)
+        public async Task<ActionResult<Matiere>> DeleteMatiere(int id)
         {
-            var enseignant = await _context.Enseignant.FindAsync(id);
-            if (enseignant == null)
+            var matiere = await _context.Matiere.FindAsync(id);
+            if (matiere == null)
             {
                 return NotFound();
             }
 
-            _context.Enseignant.Remove(enseignant);
+            _context.Matiere.Remove(matiere);
             await _context.SaveChangesAsync();
 
-            return enseignant;
+            return matiere;
         }
 
-        private bool EnseignantExists(int id)
+        private bool MatiereExists(int id)
         {
-            return _context.Enseignant.Any(e => e.Id == id);
+            return _context.Matiere.Any(e => e.Id == id);
         }
     }
 }
