@@ -266,7 +266,7 @@ namespace coreApi_PFA.Models
                 entity.Property(e => e.Sujet)
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
+                entity.Property(e => e.Duree).HasColumnName("Duree");
                 entity.HasOne(d => d.IdNavigation)
                     .WithMany(p => p.Seance)
                     .HasForeignKey(d => new { d.IdFiliere, d.IdMatiere })
