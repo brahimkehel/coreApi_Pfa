@@ -22,6 +22,32 @@ namespace coreApi_PFA.Controllers
         {
             _context = context;
         }
+        //GET: api/Etudiants/NonApp
+        [HttpGet]
+        [Route("NonApp")]
+        public async Task<object> GetNonApp()
+        {
+            return await (from e in _context.Etudiant
+                          join f in _context.Filiere on e.IdFiliere equals f.Id where e.Approve==false
+                          select new
+                          {
+                              Id = e.Id,
+                              Cin = e.Cin,
+                              DateNais = e.DateNais,
+                              Nom = e.Nom,
+                              Prenom = e.Prenom,
+                              Email = e.Email,
+                              MotdePasse = e.MotdePasse,
+                              Adresse = e.Adresse,
+                              Telephone = e.Telephone,
+                              Genre = e.Genre,
+                              CNE = e.Cne,
+                              IdFiliere = e.IdFiliere,
+                              Filiere = f.Libelle,
+                          }).ToListAsync();
+        }
+
+
         //GET: api/Etudiants/Nb
         [HttpGet]
         [Route("Nb")]
@@ -36,7 +62,7 @@ namespace coreApi_PFA.Controllers
         [HttpGet]
         public async Task<object> GetEtudiant()
         {
-            return await (from e in _context.Etudiant join f in _context.Filiere on e.IdFiliere equals f.Id
+            return await (from e in _context.Etudiant join f in _context.Filiere on e.IdFiliere equals f.Id where e.Approve==true
                      select new
                      {   Id = e.Id,
                          Cin = e.Cin,

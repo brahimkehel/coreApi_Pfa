@@ -233,6 +233,10 @@ namespace coreApi_PFA.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Approve)
+                   .HasMaxLength(100)
+                   .IsUnicode(false);
+
                 entity.HasOne(d => d.IdFiliereNavigation)
                     .WithMany(p => p.Etudiant)
                     .HasForeignKey(d => d.IdFiliere)

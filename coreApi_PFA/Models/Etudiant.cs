@@ -22,7 +22,7 @@ namespace coreApi_PFA.Models
         public string Telephone { get; set; }
         public string Cne { get; set; }
         public int? IdFiliere { get; set; }
-
+        public bool Approve { get; set; }
         public virtual Filiere IdFiliereNavigation { get; set; }
         public virtual ICollection<Absence> Absence { get; set; }
     }
