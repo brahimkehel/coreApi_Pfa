@@ -74,7 +74,24 @@ namespace coreApi_PFA.Controllers
 
             return NoContent();
         }
-
+        [HttpGet("{id}")]
+        [Route("GetSpecificSeances/{id}")]
+        public async Task<object> GetSpecificSeances(int id)
+        {
+            return await (from e in _context.Etudiant
+                          join f in _context.Filiere on e.IdFiliere equals f.Id
+                          join s in _context.Seance on f.Id equals s.IdFiliere
+                          join m in _context.Matiere on s.IdMatiere equals m.Id
+                          where e.Id == id
+                          select new
+                          {
+                              date = s.Date,
+                              sujet = s.Sujet,
+                              duree = s.Duree,
+                              filiere = f.Libelle,
+                              matiere = m.Libelle
+                          }).ToListAsync();
+        }
         // POST: api/Seances
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
