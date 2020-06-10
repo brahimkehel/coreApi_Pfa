@@ -22,6 +22,24 @@ namespace coreApi_PFA.Controllers
             _context = context;
         }
 
+        // GET: api/GetAllSeances
+        [HttpGet]
+        [Route("GetAllSeances")]
+        public async Task<object> GetAllSeances()
+        {
+            return await (from s in _context.Seance
+                          join f in _context.Filiere on s.IdFiliere equals f.Id
+                          join m in _context.Matiere on s.IdMatiere equals m.Id
+                          select new
+                          {
+                              date = s.Date,
+                              sujet=s.Sujet,
+                              duree=s.Duree,
+                              filiere=f.Libelle,
+                              matiere=m.Libelle
+                          }).ToListAsync();
+        }
+
         // GET: api/Seances
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Seance>>> GetSeance()

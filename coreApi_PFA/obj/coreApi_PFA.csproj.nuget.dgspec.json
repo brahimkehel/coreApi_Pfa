@@ -1,21 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\othman\\source\\repos\\coreApi_Pfa\\coreApi_PFA\\coreApi_PFA.csproj": {}
+    "C:\\Users\\MICRO\\source\\repos\\coreApi_PFA\\coreApi_PFA\\coreApi_PFA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\othman\\source\\repos\\coreApi_Pfa\\coreApi_PFA\\coreApi_PFA.csproj": {
+    "C:\\Users\\MICRO\\source\\repos\\coreApi_PFA\\coreApi_PFA\\coreApi_PFA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\othman\\source\\repos\\coreApi_Pfa\\coreApi_PFA\\coreApi_PFA.csproj",
+        "projectUniqueName": "C:\\Users\\MICRO\\source\\repos\\coreApi_PFA\\coreApi_PFA\\coreApi_PFA.csproj",
         "projectName": "coreApi_PFA",
-        "projectPath": "C:\\Users\\othman\\source\\repos\\coreApi_Pfa\\coreApi_PFA\\coreApi_PFA.csproj",
-        "packagesPath": "C:\\Users\\othman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\othman\\source\\repos\\coreApi_Pfa\\coreApi_PFA\\obj\\",
+        "projectPath": "C:\\Users\\MICRO\\source\\repos\\coreApi_PFA\\coreApi_PFA\\coreApi_PFA.csproj",
+        "packagesPath": "C:\\Users\\MICRO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MICRO\\source\\repos\\coreApi_PFA\\coreApi_PFA\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\othman\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\MICRO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -38,6 +43,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.JsonPatch": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[3.1.4, )"
@@ -62,7 +71,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.1.2, )"
+              "version": "[3.1.3, )"
             },
             "Twilio": {
               "target": "Package",
@@ -79,12 +88,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.1.2, 3.1.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -93,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
