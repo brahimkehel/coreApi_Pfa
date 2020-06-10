@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using coreApi_PFA.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.VisualBasic;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace coreApi_PFA.Controllers
 {
@@ -120,6 +121,35 @@ namespace coreApi_PFA.Controllers
                     throw;
                 }
             }
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<Etudiant> patchDoc)
+        {
+            if (patchDoc == null)
+            {
+                return BadRequest();
+            }
+
+            var authorFromDB = await _context.Etudiant.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (authorFromDB == null)
+            {
+                return NotFound();
+            }
+
+            patchDoc.ApplyTo(authorFromDB);
+
+            var isValid = TryValidateModel(authorFromDB);
+
+            if (!isValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
