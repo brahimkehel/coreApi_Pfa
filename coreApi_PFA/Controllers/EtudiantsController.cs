@@ -23,7 +23,6 @@ namespace coreApi_PFA.Controllers
         {
             _context = context;
         }
-
         //GET: api/Etudiants/NonApp
         [HttpGet]
         [Route("NonApp")]
@@ -49,6 +48,7 @@ namespace coreApi_PFA.Controllers
                           }).ToListAsync();
         }
 
+
         //GET: api/Etudiants/Nb
         [HttpGet]
         [Route("Nb")]
@@ -56,6 +56,8 @@ namespace coreApi_PFA.Controllers
         {
             return await _context.Etudiant.CountAsync();
         }
+
+        
 
         // GET: api/Etudiants
         [HttpGet]
