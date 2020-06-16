@@ -15,7 +15,7 @@ namespace coreApi_PFA.Models
         public string Sujet { get; set; }
         public int? IdFiliere { get; set; }
         public int? IdMatiere { get; set; }
-        public int Duree { get; set; }
+        public int? Duree { get; set; }
 
         public virtual Affectation IdNavigation { get; set; }
         public virtual ICollection<Absence> Absence { get; set; }

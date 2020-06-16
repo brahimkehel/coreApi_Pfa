@@ -21,19 +21,20 @@ namespace coreApi_PFA.Models
         public virtual DbSet<AnneeScolaire> AnneeScolaire { get; set; }
         public virtual DbSet<Enseignant> Enseignant { get; set; }
         public virtual DbSet<Etudiant> Etudiant { get; set; }
+        public virtual DbSet<Fichiers> Fichiers { get; set; }
         public virtual DbSet<Filiere> Filiere { get; set; }
         public virtual DbSet<Matiere> Matiere { get; set; }
         public virtual DbSet<Seance> Seance { get; set; }
         public virtual DbSet<Utilisateur> Utilisateur { get; set; }
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer("server=MIC;database=Pfa1;integrated security=true");
-//            }
-//        }
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("server=MIC;database=Pfa1;integrated security=True");
+            }
+        }*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -194,6 +195,8 @@ namespace coreApi_PFA.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Approve).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.Cin)
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -233,14 +236,30 @@ namespace coreApi_PFA.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Approve)
-                   .HasMaxLength(100)
-                   .IsUnicode(false);
-
                 entity.HasOne(d => d.IdFiliereNavigation)
                     .WithMany(p => p.Etudiant)
                     .HasForeignKey(d => d.IdFiliere)
                     .HasConstraintName("FK__Etudiant__Id_Fil__15502E78");
+            });
+
+            modelBuilder.Entity<Fichiers>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Nom)
+                    .HasColumnName("nom")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NomFichier)
+                    .HasColumnName("nom_fichier")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("_status")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Filiere>(entity =>
@@ -270,11 +289,12 @@ namespace coreApi_PFA.Models
                 entity.Property(e => e.Sujet)
                     .HasMaxLength(100)
                     .IsUnicode(false);
-                entity.Property(e => e.Duree).HasColumnName("Duree");
+
                 entity.HasOne(d => d.IdNavigation)
                     .WithMany(p => p.Seance)
                     .HasForeignKey(d => new { d.IdFiliere, d.IdMatiere })
-                    .HasConstraintName("FK__Seance__25869641");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("seance_fk");
             });
 
             modelBuilder.Entity<Utilisateur>(entity =>

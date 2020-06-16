@@ -1,4 +1,3 @@
-C:\Users\MICRO\source\repos\coreApi_PFA\coreApi_PFA\obj\Debug\netcoreapp3.1\coreApi_PFA.csprojAssemblyReference.cache
 C:\Users\MICRO\source\repos\coreApi_PFA\coreApi_PFA\obj\Debug\netcoreapp3.1\coreApi_PFA.csproj.CoreCompileInputs.cache
 C:\Users\MICRO\source\repos\coreApi_PFA\coreApi_PFA\obj\Debug\netcoreapp3.1\coreApi_PFA.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\MICRO\source\repos\coreApi_PFA\coreApi_PFA\obj\Debug\netcoreapp3.1\coreApi_PFA.AssemblyInfoInputs.cache
@@ -154,3 +153,4 @@ C:\Users\MICRO\source\repos\coreApi_PFA\coreApi_PFA\obj\Debug\netcoreapp3.1\stat
 C:\Users\MICRO\source\repos\coreApi_PFA\coreApi_PFA\obj\Debug\netcoreapp3.1\coreApi_PFA.dll
 C:\Users\MICRO\source\repos\coreApi_PFA\coreApi_PFA\obj\Debug\netcoreapp3.1\coreApi_PFA.pdb
 C:\Users\MICRO\source\repos\coreApi_PFA\coreApi_PFA\obj\Debug\netcoreapp3.1\coreApi_PFA.genruntimeconfig.cache
+C:\Users\MICRO\source\repos\coreApi_PFA\coreApi_PFA\obj\Debug\netcoreapp3.1\coreApi_PFA.csprojAssemblyReference.cache
