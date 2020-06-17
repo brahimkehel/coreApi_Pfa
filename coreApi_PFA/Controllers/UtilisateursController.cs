@@ -37,7 +37,26 @@ namespace coreApi_PFA.Controllers
         {
             var user = _context.Utilisateur.FromSqlInterpolated($"SELECT * FROM dbo.Utilisateur").Where(res => res.Email == utilisateur.Email).FirstOrDefault();
             //var user = await _context.Utilisateurs.FindAsync(utilisateur.Id);
-            if (user != null && user.MotdePasse == utilisateur.MotdePasse && user.Email == utilisateur.Email)
+            if(user != null && user.MotdePasse == utilisateur.MotdePasse && user.Email == utilisateur.Email && user.Status=="Etudiant")
+            {
+                var etu = _context.Etudiant.FromSqlInterpolated($"SELECT * FROM dbo.Etudiant").Where(res => res.Id ==user.Id).FirstOrDefault();
+                if(etu.Approve==false)
+                {
+                    return BadRequest( "Vous n etes pas apprové!");
+                }
+                else
+                {
+                    return Ok(new
+                    {
+                        user.Id,
+                        user.Nom,
+                        user.Prenom,
+                        user.Email,
+                        user.Status
+                    });
+                }
+            }
+            else if (user != null && user.MotdePasse == utilisateur.MotdePasse && user.Email == utilisateur.Email)
             {
                 return Ok(new
                 {
@@ -46,11 +65,11 @@ namespace coreApi_PFA.Controllers
                     user.Prenom,
                     user.Email,
                     user.Status
-                }); ;
+                }); 
             }
             else
             {
-                return BadRequest(new { message = "Email ou Mot de passe est incorrect" });
+                return BadRequest("Email ou Mot de passe est incorrect");
             }
         }
 
