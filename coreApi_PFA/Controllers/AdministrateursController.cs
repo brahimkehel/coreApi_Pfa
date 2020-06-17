@@ -7,9 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using coreApi_PFA.Models;
 using Microsoft.AspNetCore.JsonPatch;
-using SendGrid;
-using SendGrid.Helpers.Mail;
-
 namespace coreApi_PFA.Controllers
 {
     [Route("api/[controller]")]
