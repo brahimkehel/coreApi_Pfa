@@ -9,6 +9,9 @@ using coreApi_PFA.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.VisualBasic;
 using Microsoft.AspNetCore.JsonPatch;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using Microsoft.Extensions.Configuration;
 
 namespace coreApi_PFA.Controllers
 {
@@ -18,10 +21,12 @@ namespace coreApi_PFA.Controllers
     public class EtudiantsController : ControllerBase
     {
         private readonly Pfa1Context _context;
+        private IConfiguration _configuration;
 
-        public EtudiantsController(Pfa1Context context)
+        public EtudiantsController(Pfa1Context context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
         //GET: api/Etudiants/NonApp
         [HttpGet]
@@ -141,7 +146,6 @@ namespace coreApi_PFA.Controllers
             {
                 return NotFound();
             }
-
             patchDoc.ApplyTo(authorFromDB);
 
             var isValid = TryValidateModel(authorFromDB);
@@ -152,7 +156,6 @@ namespace coreApi_PFA.Controllers
             }
 
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
 

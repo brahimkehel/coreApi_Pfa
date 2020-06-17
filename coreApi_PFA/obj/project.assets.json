@@ -1176,6 +1176,18 @@
           }
         }
       },
+      "SendGrid/9.16.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/SendGrid.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SendGrid.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.2": {
         "type": "package",
         "dependencies": {
@@ -4659,6 +4671,26 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "SendGrid/9.16.0": {
+      "sha512": "yu/2vW/BgSM/sCvd/K3aYHPDoFGtdh5k6lXbH3ART036gA9R4/K2ogCajEMYEKi4gEXuOZxKF+j0btnRkG5xyw==",
+      "type": "package",
+      "path": "sendgrid/9.16.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/SendGrid.dll",
+        "lib/net452/SendGrid.pdb",
+        "lib/net452/SendGrid.xml",
+        "lib/netstandard1.3/SendGrid.dll",
+        "lib/netstandard1.3/SendGrid.pdb",
+        "lib/netstandard1.3/SendGrid.xml",
+        "lib/netstandard2.0/SendGrid.dll",
+        "lib/netstandard2.0/SendGrid.pdb",
+        "lib/netstandard2.0/SendGrid.xml",
+        "sendgrid.9.16.0.nupkg.sha512",
+        "sendgrid.nuspec"
       ]
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.2": {
@@ -9039,31 +9071,25 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.2",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.4",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.3",
+      "SendGrid >= 9.16.0",
       "Twilio >= 5.42.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MICRO\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\othman\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MICRO\\source\\repos\\coreApi_PFA\\coreApi_PFA\\coreApi_PFA.csproj",
+      "projectUniqueName": "C:\\Users\\othman\\source\\repos\\coreApi_Pfa\\coreApi_PFA\\coreApi_PFA.csproj",
       "projectName": "coreApi_PFA",
-      "projectPath": "C:\\Users\\MICRO\\source\\repos\\coreApi_PFA\\coreApi_PFA\\coreApi_PFA.csproj",
-      "packagesPath": "C:\\Users\\MICRO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MICRO\\source\\repos\\coreApi_PFA\\coreApi_PFA\\obj\\",
+      "projectPath": "C:\\Users\\othman\\source\\repos\\coreApi_Pfa\\coreApi_PFA\\coreApi_PFA.csproj",
+      "packagesPath": "C:\\Users\\othman\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\othman\\source\\repos\\coreApi_Pfa\\coreApi_PFA\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\MICRO\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\othman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -9116,6 +9142,10 @@
             "target": "Package",
             "version": "[3.1.3, )"
           },
+          "SendGrid": {
+            "target": "Package",
+            "version": "[9.16.0, )"
+          },
           "Twilio": {
             "target": "Package",
             "version": "[5.42.0, )"
@@ -9131,6 +9161,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -9139,7 +9175,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

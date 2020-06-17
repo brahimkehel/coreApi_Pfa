@@ -32,6 +32,7 @@ namespace coreApi_PFA.Controllers
                           join m in _context.Matiere on s.IdMatiere equals m.Id
                           select new
                           {
+                              id=s.Id,
                               date = s.Date,
                               sujet=s.Sujet,
                               duree=s.Duree,

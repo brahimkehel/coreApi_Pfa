@@ -29,7 +29,7 @@ namespace coreApi_PFA
         {
             services.AddControllers().AddNewtonsoftJson();
             services.AddDbContext<coreApi_PFA.Models.Pfa1Context>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DBConnectionString")));
+            options.UseSqlServer(Configuration.GetConnectionString("cnx")));
             services.AddCors(options => {
                 options.AddPolicy("CorsEnabling", builder =>
                 {
