@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using coreApi_PFA.Models;
 using Microsoft.AspNetCore.JsonPatch;
-
 namespace coreApi_PFA.Controllers
 {
     [Route("api/[controller]")]
@@ -16,11 +15,11 @@ namespace coreApi_PFA.Controllers
     {
         private readonly Pfa1Context _context;
 
+
         public AdministrateursController(Pfa1Context context)
         {
             _context = context;
         }
-
         // GET: api/Administrateurs
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Administrateur>>> GetAdministrateur()
@@ -83,23 +82,20 @@ namespace coreApi_PFA.Controllers
             }
 
             var authorFromDB = await _context.Administrateur.FirstOrDefaultAsync(x => x.Id == id);
-
             if (authorFromDB == null)
             {
                 return NotFound();
             }
 
             patchDoc.ApplyTo(authorFromDB);
-
+           
             var isValid = TryValidateModel(authorFromDB);
 
             if (!isValid)
             {
                 return BadRequest(ModelState);
             }
-
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
 

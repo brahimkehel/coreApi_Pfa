@@ -65,6 +65,7 @@ namespace coreApi_PFA.Controllers
                     user.Prenom,
                     user.Email,
                     user.Status
+
                 }); 
             }
             else

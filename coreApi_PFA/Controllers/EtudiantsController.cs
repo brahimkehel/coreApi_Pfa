@@ -9,6 +9,10 @@ using coreApi_PFA.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.VisualBasic;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.Extensions.Configuration;
+using MimeKit;
+using MimeKit.Text;
+using MailKit.Net.Smtp;
 
 namespace coreApi_PFA.Controllers
 {
@@ -18,10 +22,12 @@ namespace coreApi_PFA.Controllers
     public class EtudiantsController : ControllerBase
     {
         private readonly Pfa1Context _context;
+        private IConfiguration _configuration;
 
-        public EtudiantsController(Pfa1Context context)
+        public EtudiantsController(Pfa1Context context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
         //GET: api/Etudiants/NonApp
         [HttpGet]
@@ -130,18 +136,32 @@ namespace coreApi_PFA.Controllers
         [HttpPatch("{id}")]
         public async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<Etudiant> patchDoc)
         {
+            string emailBody=string.Empty;
             if (patchDoc == null)
             {
                 return BadRequest();
             }
-
+            
             var authorFromDB = await _context.Etudiant.FirstOrDefaultAsync(x => x.Id == id);
-
+            var message = new MimeMessage();
+            message.To.Add(new MailboxAddress(authorFromDB.Nom+" "+authorFromDB.Prenom, authorFromDB.Email));
+            message.From.Add(new MailboxAddress("Ecole Marocaine Virtuelle", "oth.fr.mane98@gmail.com"));
+            message.Subject = "Approuvé";
+            if (authorFromDB.Genre == "Homme") { 
+                 emailBody = "<h1>Bonjour monsieur " + authorFromDB.Nom + " " + authorFromDB.Prenom + " </h1><p>vous êtes approuvés pour confirmer votre inscription cliquez sur ce lien</p><a href='http://localhost:4200/Authentification' >ICI</a>";
+            }
+            else if(authorFromDB.Genre == "Femme")
+            {
+                 emailBody = "<h1>Bonjour Mme/Mlle " + authorFromDB.Nom + " " + authorFromDB.Prenom + " </h1><p>vous êtes approuvés pour confirmer votre inscription cliquez sur ce lien</p><a href='http://localhost:4200/Authentification' >ICI</a>";
+            }
+            message.Body = new TextPart(TextFormat.Html)
+            {
+                Text = emailBody
+            };
             if (authorFromDB == null)
             {
                 return NotFound();
             }
-
             patchDoc.ApplyTo(authorFromDB);
 
             var isValid = TryValidateModel(authorFromDB);
@@ -150,9 +170,15 @@ namespace coreApi_PFA.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            using (var emailClient = new SmtpClient())
+            {
+                emailClient.Connect("smtp.gmail.com", 587, false);
+                emailClient.Authenticate("oth.fr.mane98@gmail.com", "aseyom0654@");
+                emailClient.Send(message);
+                emailClient.Disconnect(true);
+            }
             await _context.SaveChangesAsync();
-
+            
             return NoContent();
         }
 
