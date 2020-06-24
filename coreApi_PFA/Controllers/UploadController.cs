@@ -26,7 +26,7 @@ namespace coreApi_PFA.Controllers
         }
 
         [HttpPost("{id}"), DisableRequestSizeLimit]
-        public IActionResult Upload(int id)
+        public async Task<IActionResult> Upload(int id)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace coreApi_PFA.Controllers
                     fichier.Status = user.Status;
                     fichier.NomFichier = fileName;
                     _context.Fichiers.Add(fichier);
-                    _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                     return Ok(new { dbPath });
                 }
                 else
